@@ -1,0 +1,1 @@
+Simple java client library for [kraken.io](https://kraken.io)
