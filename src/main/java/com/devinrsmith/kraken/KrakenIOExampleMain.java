@@ -1,6 +1,7 @@
 package com.devinrsmith.kraken;
 
 import com.devinrsmith.kraken.data.requests.Auth;
+import com.devinrsmith.kraken.data.requests.Resize;
 import com.devinrsmith.kraken.data.requests.URLRequest;
 import com.devinrsmith.kraken.data.responses.Response;
 
@@ -30,6 +31,7 @@ public class KrakenIOExampleMain {
         final KrakenIO service = KrakenIO.Service.get(API_ENDPOINT);
 
         final URLRequest.Waiting waitingRequest = URLRequest.builder(new Auth(apiKey, apiSecret), url).
+                resize(new Resize(800, 800, "auto", null)).
                 lossy(true).
                 quality(70).
                 build();

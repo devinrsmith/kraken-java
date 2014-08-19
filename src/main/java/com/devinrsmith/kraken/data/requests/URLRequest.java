@@ -13,14 +13,14 @@ public class URLRequest {
     }
 
     public static class Waiting extends URLRequest {
-        private Waiting(Auth auth, String url, Boolean wait, Boolean lossy, Integer quality, Boolean webp, CloudFilesStore cf_store, S3Store s3_store, AzureStore azure_store) {
-            super(auth, url, null, wait, lossy, quality, webp, cf_store, s3_store, azure_store);
+        private Waiting(Auth auth, String url, Boolean wait, Boolean lossy, Integer quality, Boolean webp, Resize resize, CloudFilesStore cf_store, S3Store s3_store, AzureStore azure_store) {
+            super(auth, url, null, wait, lossy, quality, webp, resize, cf_store, s3_store, azure_store);
         }
     }
 
     public static class Callback extends URLRequest {
-        private Callback(Auth auth, String url, String callback_url, Boolean lossy, Integer quality, Boolean webp, CloudFilesStore cf_store, S3Store s3_store, AzureStore azure_store) {
-            super(auth, url, callback_url, null, lossy, quality, webp, cf_store, s3_store, azure_store);
+        private Callback(Auth auth, String url, String callback_url, Boolean lossy, Integer quality, Boolean webp, Resize resize, CloudFilesStore cf_store, S3Store s3_store, AzureStore azure_store) {
+            super(auth, url, callback_url, null, lossy, quality, webp, resize, cf_store, s3_store, azure_store);
         }
     }
 
@@ -31,11 +31,12 @@ public class URLRequest {
     private Boolean lossy;
     private Integer quality;
     private Boolean webp;
+    private Resize resize;
     private CloudFilesStore cf_store;
     private S3Store s3_store;
     private AzureStore azure_store;
 
-    private URLRequest(Auth auth, String url, String callback_url, Boolean wait, Boolean lossy, Integer quality, Boolean webp, CloudFilesStore cf_store, S3Store s3_store, AzureStore azure_store) {
+    private URLRequest(Auth auth, String url, String callback_url, Boolean wait, Boolean lossy, Integer quality, Boolean webp, Resize resize, CloudFilesStore cf_store, S3Store s3_store, AzureStore azure_store) {
         this.auth = auth;
         this.url = url;
         this.callback_url = callback_url;
@@ -43,6 +44,7 @@ public class URLRequest {
         this.lossy = lossy;
         this.quality = quality;
         this.webp = webp;
+        this.resize = resize;
         this.cf_store = cf_store;
         this.s3_store = s3_store;
         this.azure_store = azure_store;
@@ -76,6 +78,10 @@ public class URLRequest {
         return webp;
     }
 
+    public Resize getResize() {
+        return resize;
+    }
+
     public CloudFilesStore getCf_store() {
         return cf_store;
     }
@@ -94,6 +100,7 @@ public class URLRequest {
         private Boolean lossy;
         private Integer quality;
         private Boolean webp;
+        private Resize resize;
         private CloudFilesStore cf_store;
         private S3Store s3_store;
         private AzureStore azure_store;
@@ -118,6 +125,11 @@ public class URLRequest {
             return this;
         }
 
+        public Builder resize(final Resize resize) {
+            this.resize = resize;
+            return this;
+        }
+
         public Builder cf_store(final CloudFilesStore cf_store) {
             this.cf_store = cf_store;
             return this;
@@ -135,11 +147,11 @@ public class URLRequest {
 
 
         public Waiting build() {
-            return new Waiting(auth, url, true, lossy, quality, webp, cf_store, s3_store, azure_store);
+            return new Waiting(auth, url, true, lossy, quality, webp, resize, cf_store, s3_store, azure_store);
         }
 
         public Callback build(String callback_url) {
-            return new Callback(auth, url, callback_url, lossy, quality, webp, cf_store, s3_store, azure_store);
+            return new Callback(auth, url, callback_url, lossy, quality, webp, resize, cf_store, s3_store, azure_store);
         }
     }
 }
