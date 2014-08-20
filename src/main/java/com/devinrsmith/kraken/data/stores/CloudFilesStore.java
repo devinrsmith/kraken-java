@@ -9,11 +9,11 @@ public class CloudFilesStore {
     private String container;
     private String path;
 
-    public CloudFilesStore(String user, String key, String container) {
+    public CloudFilesStore(String user, String key, String container, String path) {
         this.user = user;
         this.key = key;
         this.container = container;
-        this.path = null;
+        this.path = path;
     }
 
     public String getUser() {
