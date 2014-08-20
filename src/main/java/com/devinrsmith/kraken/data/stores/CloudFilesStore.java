@@ -7,11 +7,13 @@ public class CloudFilesStore {
     private String user;
     private String key;
     private String container;
+    private String path;
 
     public CloudFilesStore(String user, String key, String container) {
         this.user = user;
         this.key = key;
         this.container = container;
+        this.path = null;
     }
 
     public String getUser() {
@@ -24,5 +26,9 @@ public class CloudFilesStore {
 
     public String getContainer() {
         return container;
+    }
+
+    public String getPath() {
+        return path;
     }
 }
